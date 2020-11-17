@@ -20,18 +20,26 @@ class ContactCreate extends Component
         return view('livewire.contact-create');
     }
 
+    public function updated($field){
+        $this->validateOnly($field, [
+            'name' => 'required|min:4',
+            'phone' => 'required|integer',
+        ]);
+    }
+
     public function store()
     {   
         $this->validate([
             'name' => 'required|min:4',
             'phone' => 'required|integer',
-            'picture' => 'required|image|max:5090'
+            // 'picture' => 'required|image|max:5090'
         ]);
         
-        $this->picture->store('picture');
+        // $this->picture->store('picture');
+
         $contact = Contact::create([
             'name' => $this->name,
-            'picture' => $this->picture,
+            // 'picture' => $this->picture,
             'phone' => $this->phone,
         ]);
 
