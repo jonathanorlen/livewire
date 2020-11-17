@@ -9,7 +9,7 @@ use Str;
 class ContactCreate extends Component
 {   
     use WithFileUploads;   
-    public $name, $phone, $picture;
+    public $name, $phone, $avatar;
 
     // public function mount($data){
     //     $this->data = $data;
@@ -32,19 +32,21 @@ class ContactCreate extends Component
         $this->validate([
             'name' => 'required|min:4',
             'phone' => 'required|integer',
-            // 'picture' => 'required|image|max:5090'
+            'avatar' => 'required|image|max:5090'
         ]);
         
-        // $this->picture->store('picture');
+        $name = Str::random(10).'.'.$this->avatar->extension();
+        $this->avatar->storeAs('avatar', $name);
 
         $contact = Contact::create([
             'name' => $this->name,
-            // 'picture' => $this->picture,
+            'avatar' => $name,
             'phone' => $this->phone,
         ]);
 
         $this->resetInput();
         $this->emit('contactStored', $contact);
+        $this->emit('formToggle');
     }
 
     private function upload_image($image,$old_image = null){

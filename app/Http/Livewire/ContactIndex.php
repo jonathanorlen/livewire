@@ -17,7 +17,7 @@ class ContactIndex extends Component
 
     protected $listeners = [
         'contactStored',
-        'contactUpdate',
+        'contactUpdate'
     ];
 
     protected $queryString  = ['search'];
@@ -52,9 +52,15 @@ class ContactIndex extends Component
 
     public function contactStored($data){
         session()->flash('message','Contact '.$data['name'].' was stored');
+        $this->formToggle();
     }
 
     public function contactUpdate($data){
         session()->flash('message','Contact '.$data['name'].' was update');
+        $this->formToggle();
+    }
+
+    private function formToggle(){
+        $this->form =  !$this->form;
     }
 }

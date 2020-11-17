@@ -24,16 +24,16 @@
 
             <div class="form-group col-md-6">
                 <label for="">Picture</label>
-                <input wire:model="picture" type="file" name="picture" id=""
-                    class="form-control @error('picture') is-invalid @enderror" placeholder="Number">
-                @error('picture')
+                <input wire:model="avatar" type="file" name="avatar" id=""
+                    class="form-control @error('avatar') is-invalid @enderror" placeholder="Number">
+                @error('avatar')
                     <span class="invalid-feedback">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-                @if($picture)
+                @if($avatar)
                     <label for="">Preview</label>
-                    <img src="{{ $picture->temporaryUrl() }}" width="100%">
+                    <img src="{{ $avatar->temporaryUrl() }}" width="100%">
                 @endif
             </div>
         </div>
